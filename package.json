@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node .",
     "dev": "nodemon .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,11 +20,17 @@
   },
   "homepage": "https://github.com/eswarsaladi/webapp#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
-    "morgan": "^1.10.0"
+    "knex": "^2.3.0",
+    "morgan": "^1.10.0",
+    "pg": "^8.8.0",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "jest": "^29.1.2",
+    "nodemon": "^2.0.20",
+    "supertest": "^6.3.0"
   }
 }
