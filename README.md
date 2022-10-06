@@ -28,6 +28,7 @@ npm run dev
 ```
 
 To test
+We will be using jest for unit tests
 
 ```
 npm run test
