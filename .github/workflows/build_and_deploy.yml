@@ -29,9 +29,6 @@ jobs:
       - name: Packer Init
         run: cd packer && packer init .
 
-      - name: Zip Files
-        run: ./zip_folder.sh
-
       - name: Packer Build - Branches
         if: "startsWith(github.ref, 'refs/heads/')"
         run: packer build .
