@@ -65,12 +65,12 @@ build {
 
 
   provisioner "file" {
-    source      = "../webapp.service"
+    source      = "./webapp.service"
     destination = "/tmp/webapp.service"
   }
 
   provisioner "file" {
-    source      = "../webapp.zip"
+    source      = "./webapp.zip"
     destination = "/home/ubuntu/webapp.zip"
   }
   provisioner "shell" {
