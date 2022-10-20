@@ -20,9 +20,9 @@ async function isValidCreateDetails(request, response, next) {
   if (
     validator.isEmail(userDetails.username) &&
     validator.isStrongPassword(userDetails.password) &&
-    !Object.hasOwn(userDetails, "id") &&
-    !Object.hasOwn(userDetails, "account_created") &&
-    !Object.hasOwn(userDetails, "account_modified")
+    !userDetails.id &&
+    !userDetails.account_created &&
+    !userDetails.account_modified
   ) {
     next();
   } else {

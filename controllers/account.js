@@ -23,7 +23,7 @@ async function create(request, response) {
   const userDetails = request.body;
   const result = await Account.create(userDetails);
   if (result.error) {
-    response.status(400).json({ error: "Bad Request" });
+    response.status(400).json({ error: result.error });
   } else {
     response.status(200).json({ ...result.response });
   }

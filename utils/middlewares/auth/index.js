@@ -4,7 +4,7 @@ async function isAuthenticated(req, res, next) {
   var authheader = req.headers.authorization;
 
   if (!authheader) {
-    res.status(401).json({ error: "Unauthorised" });
+    return res.status(401).json({ error: "Unauthorised" });
   }
 
   var auth = new Buffer.from(authheader.split(" ")[1], "base64")
@@ -18,7 +18,7 @@ async function isAuthenticated(req, res, next) {
     req.user = { username };
     next();
   } else {
-    res.status(401).json({ error: "Unauthorised" });
+    return res.status(401).json({ error: "Unauthorised" });
   }
 }
 
