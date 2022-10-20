@@ -51,16 +51,7 @@ source "amazon-ebs" "my-ami" {
 
 build {
 
-    hcp_packer_registry {
-    bucket_name = "csye6225-webapp"
-    description = <<EOT
-        This is CSYE6225 Image
-    EOT
 
-    bucket_labels = {
-      "csye6225-webapp" = "csye6225-webapp",
-    }
-  }
   sources = ["source.amazon-ebs.my-ami"]
 
 
@@ -77,11 +68,5 @@ build {
     script = "./app.sh"
   }
 
-    post-processor "manifest" {
-    output     = "packer_manifest.json"
-    strip_path = true
-    custom_data = {
-      iteration_id = packer.iterationID
-    }
-  }
+
 }
