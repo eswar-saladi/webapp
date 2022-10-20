@@ -19,7 +19,21 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+
       - run: ./zip_folder.sh
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_KEY}}
+          aws-regions: us-east-1
+
+      - name: Packer Init
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: init
+          target: webapp.pkr.hcl
 
       # validate templates
       - name: Validate Template
@@ -38,5 +52,3 @@ jobs:
           target: webapp.pkr.hcl
         env:
           PACKER_LOG: 1
-          HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
-          HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
