@@ -66,7 +66,7 @@ build {
 
   provisioner "shell" {
     script = "./app.sh"
-  }
+  
 
 
 }
