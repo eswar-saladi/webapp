@@ -20,9 +20,11 @@
   },
   "homepage": "https://github.com/eswarsaladi/webapp#readme",
   "dependencies": {
+    "aws-sdk": "^2.1240.0",
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.2",
-    "express": "^4.18.1",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
     "knex": "^2.3.0",
     "morgan": "^1.10.0",
     "pg": "^8.8.0",

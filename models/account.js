@@ -63,6 +63,19 @@ class Account {
     }
   }
 
+  static async getByUserName(username) {
+    try {
+      const user = await knex
+        .select("id", "username")
+        .from("accounts")
+        .where({ username })
+        .first();
+      return { response: user };
+    } catch (error) {
+      return { error: error.toString() };
+    }
+  }
+
   static async update(id, username, userDetails) {
     try {
       if (userDetails.password) {

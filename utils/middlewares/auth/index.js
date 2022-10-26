@@ -15,7 +15,8 @@ async function isAuthenticated(req, res, next) {
   const isValid = await Account.isValidPassword(username, password);
 
   if (isValid.response) {
-    req.user = { username };
+    const data = await Account.getByUserName(username);
+    req.user = { ...data.response };
     next();
   } else {
     return res.status(401).json({ error: "Unauthorised" });
