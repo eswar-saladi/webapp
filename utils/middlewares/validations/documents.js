@@ -3,6 +3,8 @@ async function isValidUploadDetails(request, response, next) {
   if (!!fileDetails.name && !!request.files) {
     next();
   } else {
-    response.status(400).json({ error: "Invalid fields identified" });
+    return response.status(400).json({ error: "Invalid fields identified" });
   }
 }
+
+module.exports = { isValidUploadDetails };

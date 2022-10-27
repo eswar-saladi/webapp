@@ -6,17 +6,17 @@ sudo apt-get upgrade -y
 
 sudo apt install -y gcc-c++ make
 sudo apt-get install -y nodejs
-sudo apt install npm postgresql postgresql-contrib unzip -y 
-# starting postgres
-sudo systemctl start postgresql.service  
+# sudo apt install npm postgresql postgresql-contrib unzip -y 
+# # starting postgres
+# sudo systemctl start postgresql.service  
 
 sudo npm cache clean -f
 sudo npm install -g n
 sudo n 14
 
 # setup database
-sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres';"
-sudo -u postgres psql -c "CREATE DATABASE webapp;" 
+# sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres';"
+# sudo -u postgres psql -c "CREATE DATABASE webapp;" 
 
 
 

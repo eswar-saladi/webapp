@@ -15,7 +15,7 @@ router.post(
   "/",
   fileUpload({
     limits: {
-      fileSize: 1024 * 1024, // 1 MB
+      fileSize: 2046 * 2046, // 1 MB
     },
     abortOnLimit: true,
   }),

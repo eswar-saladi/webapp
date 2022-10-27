@@ -22,3 +22,16 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npm test
+      - name: Packer Init
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: init
+          target: webapp.pkr.hcl
+
+      # validate templates
+      - name: Validate Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: -syntax-only
+          target: webapp.pkr.hcl
