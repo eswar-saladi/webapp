@@ -20,36 +20,36 @@ jobs:
 
       - run: ./zip_folder.sh
 
-      # - name: Configure AWS Credentials
-      #   uses: aws-actions/configure-aws-credentials@v1-node16
-      #   with:
-      #     aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
-      #     aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-      #     aws-region: us-east-1
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          aws-region: us-east-1
 
-      # - name: Packer Init
-      #   uses: hashicorp/packer-github-actions@master
-      #   with:
-      #     command: init
-      #     target: webapp.pkr.hcl
+      - name: Packer Init
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: init
+          target: webapp.pkr.hcl
 
-      # # validate templates
-      # - name: Validate Template
-      #   uses: hashicorp/packer-github-actions@master
-      #   with:
-      #     command: validate
-      #     arguments: -syntax-only
-      #     target: webapp.pkr.hcl
+      # validate templates
+      - name: Validate Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: -syntax-only
+          target: webapp.pkr.hcl
 
-      # # build artifact
-      # - name: Build Artifact
-      #   uses: hashicorp/packer-github-actions@master
-      #   with:
-      #     command: build
-      #     arguments: "-color=false -on-error=abort"
-      #     target: webapp.pkr.hcl
-      #   env:
-      #     PACKER_LOG: 1
+      # build artifact
+      - name: Build Artifact
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          arguments: "-color=false -on-error=abort"
+          target: webapp.pkr.hcl
+        env:
+          PACKER_LOG: 1
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1-node16
@@ -59,6 +59,6 @@ jobs:
           aws-region: us-east-1
 
       - run: |
-          # echo "AMI_ID=$(jq -r '.builds[0].artifact_id' manifest.json | cut -d ":" -f2)" >> $GITHUB_ENV
-           aws ec2 create-launch-template-version --launch-template-name demostack-EC2-instance --version-description WebVersion2 --source-version 1 --launch-template-data '{"ImageId":"${{ env.AMI_ID }}"}'
+          echo "AMI_ID=$(jq -r '.builds[0].artifact_id' manifest.json | cut -d ":" -f2)" >> $GITHUB_ENV
+          aws ec2 create-launch-template-version --launch-template-id lt-087236c2d1927aef0 --version-description WebVersion2 --source-version 1 --launch-template-data '{"ImageId":"${{ env.AMI_ID }}"}'
           aws autoscaling start-instance-refresh --auto-scaling-group-name myvpc123-AutoScalingGroup-C5HFCCMI8EFT --strategy Rolling --desired-configuration '{"LaunchTemplate":{"LaunchTemplateName":"myvpc123-launch-template","Version":"$Latest"}}'
