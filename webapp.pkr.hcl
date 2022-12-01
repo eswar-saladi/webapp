@@ -67,11 +67,11 @@ build {
     script = "./app.sh"
   }
 
-
-}
-
-post-processor "manifest" {
+  post-processor "manifest" {
   output = "manifest.json"
   strip_path = true
   
 }
+
+}
+
