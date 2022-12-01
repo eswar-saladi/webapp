@@ -9,7 +9,7 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
-app.use("/v3", require("./routes"));
+app.use("/v2", require("./routes"));
 app.get("/healthz", (req, res) =>
   res.status(200).json({ message: "Server is Live!!!" })
 );
