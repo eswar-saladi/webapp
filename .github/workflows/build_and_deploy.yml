@@ -7,6 +7,7 @@ on:
 env:
   AWS_REGION: us-east-1
   S3BUCKET: myvpc123-deploymentbucket
+  AMI_ID: ami-0b0d338ad92cfeb32
 
 jobs:
   packer:
@@ -58,7 +59,6 @@ jobs:
           aws-region: us-east-1
 
       - run: |
-          run: |
-          export AMI_ID=$(jq -r '.builds[0].artifact_id' manifest.json | cut -d ":" -f2)
-          aws ec2 create-launch-template-version --launch-template-id lt-0051b42af0734aaa3 --version-description WebVersion2 --source-version 1 --launch-template-data  "{\"ImageId\":\"${AMI_ID}\"}"
+          echo "AMI_ID=$(jq -r '.builds[0].artifact_id' manifest.json | cut -d ":" -f2)" >> $GITHUB_ENV
+          aws ec2 create-launch-template-version --launch-template-id lt-0051b42af0734aaa3 --version-description WebVersion2 --source-version 1 --launch-template-data '{"ImageId":"${{ env.AMI_ID }}"}'
           aws autoscaling start-instance-refresh --auto-scaling-group-name myvpc123-AutoScalingGroup-55G4EC48IE7R --strategy Rolling --desired-configuration '{"LaunchTemplate":{"LaunchTemplateName":"myvpc123-launch-template","Version":"$Latest"}}'
